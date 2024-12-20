@@ -10,6 +10,10 @@
 
 [//]: # (TODO: Add overview mentioning the purpose of the module, supported REST API versions, and other high-level details.)
 
+HubSpot is a customer relationship management (CRM) platform widely used in marketing, sales, customer service, and operations which provides a range of tools and software solutions designed to help businesses attract, engage, and retain customers. 
+
+The ballerinax/hubspot package offers APIs to connect and interact with HubSpot API endpoints, specifically based on HubSpot API v2.
+
 ## Setup guide
 
 [//]: # (TODO: Add detailed steps to obtain credentials and configure the module.)
