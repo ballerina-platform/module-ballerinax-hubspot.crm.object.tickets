@@ -68,6 +68,7 @@ final Client HubSpotClient = check new Client(config, hubspotBaseUrl);
 // }
 
 
+// Test case to get the list of all tickets
 @test:Config{
     groups: ["live_tests"]
 }
@@ -75,4 +76,14 @@ final Client HubSpotClient = check new Client(config, hubspotBaseUrl);
 isolated function getTickets() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check HubSpotClient->/crm/v3/objects/tickets.get();
     io:println(response);
+}
+
+// Test case to get the ticket by id
+@test:Config{
+    groups: ["live_tests"]
+}
+
+isolated function getTicketById() returns error? {
+    SimplePublicObjectWithAssociations response2 = check HubSpotClient->/crm/v3/objects/tickets/["18072614505"].get();
+    io:println(response2);
 }
