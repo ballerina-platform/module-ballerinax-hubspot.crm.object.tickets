@@ -87,3 +87,20 @@ isolated function getTicketById() returns error? {
     SimplePublicObjectWithAssociations response2 = check HubSpotClient->/crm/v3/objects/tickets/["18072614505"].get();
     io:println(response2);
 }
+
+// Test case to create a new ticket
+@test:Config{
+    groups: ["live_tests"]
+}
+isolated function createTicket() returns error? {
+    SimplePublicObjectInputForCreate payload = {
+        properties: {
+            "hs_pipeline": "0",
+            "hs_pipeline_stage": "1",
+            "hs_ticket_priority": "HIGH",
+            "subject": "troubleshoot report"
+        }
+    };
+    SimplePublicObject response3 = check HubSpotClient->/crm/v3/objects/tickets.post(payload);
+    io:println(response3);
+}
