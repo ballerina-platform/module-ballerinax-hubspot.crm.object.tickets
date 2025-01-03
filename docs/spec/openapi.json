@@ -19,7 +19,7 @@
       "x-hubspot-introduction" : "Use the tickets API to create and manage CRM records that represent customer service requests in your CRM."
     },
     "servers" : [ {
-      "url" : "https://api.hubapi.com"
+      "url" : "https://api.hubapi.com/crm/v3/objects/tickets"
     } ],
     "tags" : [ {
       "name" : "Batch"
@@ -31,7 +31,7 @@
       "name" : "Search"
     } ],
     "paths" : {
-      "/crm/v3/objects/tickets/batch/read" : {
+      "/batch/read" : {
         "post" : {
           "tags" : [ "Batch" ],
           "summary" : "Read a batch of tickets by internal ID, or unique property values",
@@ -90,7 +90,7 @@
           } ]
         }
       },
-      "/crm/v3/objects/tickets/{ticketId}" : {
+      "/{ticketId}" : {
         "get" : {
           "tags" : [ "Basic" ],
           "summary" : "Read",
@@ -274,7 +274,7 @@
           } ]
         }
       },
-      "/crm/v3/objects/tickets/merge" : {
+      "/merge" : {
         "post" : {
           "tags" : [ "Merge" ],
           "summary" : "Merge two tickets with same type",
@@ -312,7 +312,7 @@
           } ]
         }
       },
-      "/crm/v3/objects/tickets/batch/archive" : {
+      "/batch/archive" : {
         "post" : {
           "tags" : [ "Batch" ],
           "summary" : "Archive a batch of tickets by ID",
@@ -344,7 +344,7 @@
           } ]
         }
       },
-      "/crm/v3/objects/tickets/batch/create" : {
+      "/batch/create" : {
         "post" : {
           "tags" : [ "Batch" ],
           "summary" : "Create a batch of tickets",
@@ -392,7 +392,7 @@
           } ]
         }
       },
-      "/crm/v3/objects/tickets/batch/update" : {
+      "/batch/update" : {
         "post" : {
           "tags" : [ "Batch" ],
           "summary" : "Update a batch of tickets by internal ID, or unique property values",
@@ -440,7 +440,7 @@
           } ]
         }
       },
-      "/crm/v3/objects/tickets" : {
+      "/" : {
         "get" : {
           "tags" : [ "Basic" ],
           "summary" : "List",
@@ -578,7 +578,7 @@
           } ]
         }
       },
-      "/crm/v3/objects/tickets/batch/upsert" : {
+      "/batch/upsert" : {
         "post" : {
           "tags" : [ "Batch" ],
           "summary" : "Create or update a batch of tickets by unique property values",
@@ -627,7 +627,7 @@
           } ]
         }
       },
-      "/crm/v3/objects/tickets/search" : {
+      "/search" : {
         "post" : {
           "tags" : [ "Search" ],
           "operationId" : "post-/crm/v3/objects/tickets/search_doSearch",
