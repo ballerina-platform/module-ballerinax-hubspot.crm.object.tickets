@@ -69,6 +69,13 @@ public type BatchResponseSimplePublicUpsertObjectWithErrors record {
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+public type BatchReadInputSimplePublicObjectId record {
+    string[] propertiesWithHistory;
+    string idProperty?;
+    SimplePublicObjectId[] inputs;
+    string[] properties;
+};
+
 public type BatchResponseSimplePublicUpsertObject record {
     string completedAt;
     string requestedAt?;
@@ -76,13 +83,6 @@ public type BatchResponseSimplePublicUpsertObject record {
     record {|string...;|} links?;
     SimplePublicUpsertObject[] results;
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
-};
-
-public type BatchReadInputSimplePublicObjectId record {
-    string[] propertiesWithHistory;
-    string idProperty?;
-    SimplePublicObjectId[] inputs;
-    string[] properties;
 };
 
 public type ValueWithTimestamp record {
@@ -292,12 +292,12 @@ public type PreviousPage record {
     string link?;
 };
 
-public type BatchInputSimplePublicObjectInputForCreate record {
-    SimplePublicObjectInputForCreate[] inputs;
-};
-
 public type BatchInputSimplePublicObjectBatchInput record {
     SimplePublicObjectBatchInput[] inputs;
+};
+
+public type BatchInputSimplePublicObjectInputForCreate record {
+    SimplePublicObjectInputForCreate[] inputs;
 };
 
 public type SimplePublicUpsertObject record {
@@ -328,7 +328,7 @@ public type AssociatedId record {
     string 'type;
 };
 
-// Provides API key configurations needed when communicating with a remote HTTP endpoint.
+//  Provides API key configurations needed when communicating with a remote HTTP endpoint.
 public type ApiKeysConfig record {|
     string private\-app\-legacy;
     string private\-app;

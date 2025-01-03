@@ -15,14 +15,14 @@ OAuth2RefreshTokenGrantConfig auth = {
 };
 
 ConnectionConfig config = {auth};
-final Client HubSpotClient = check new Client(config, "https://api.hubapi.com");
+final Client HubSpotClient = check new Client(config, "https://api.hubapi.com/crm/v3/objects/tickets");
 
 // Test to archive the ticket by id
 @test:Config{
     groups: ["live_tests"]
 }
 isolated function archiveTicketById() returns error? {
-    http:Response|error response1 = check HubSpotClient->/crm/v3/objects/tickets/["18392088879"].delete();
+    http:Response|error response1 = check HubSpotClient->/["18100843823"].delete();
     // io:println(response1);
     test:assertTrue(response1 is http:Response, "Response is not a http:Response");
 }
@@ -34,7 +34,7 @@ isolated function archiveTicketById() returns error? {
 }
 
 isolated function getTickets() returns error? {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response2 = check HubSpotClient->/crm/v3/objects/tickets.get();
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response2 = check HubSpotClient->/.get();
     // io:println(response2);
     test:assertTrue(response2.length() > 0,"No tickets found");
 }
@@ -45,7 +45,7 @@ isolated function getTickets() returns error? {
 }
 
 isolated function getTicketById() returns error? {
-    SimplePublicObjectWithAssociations response3 = check HubSpotClient->/crm/v3/objects/tickets/["18189789866"].get();
+    SimplePublicObjectWithAssociations response3 = check HubSpotClient->/["18189789866"].get();
     // io:println(response3);
     test:assertTrue(response3 is SimplePublicObjectWithAssociations, "Response is not a SimplePublicObjectWithAssociations");
 }
@@ -63,7 +63,7 @@ isolated function updateTicketById() returns error? {
         "hs_pipeline": "0"
         }
     };
-    SimplePublicObject response4 = check HubSpotClient->/crm/v3/objects/tickets/["18072614505"].patch(payload);
+    SimplePublicObject response4 = check HubSpotClient->/["18072614505"].patch(payload);
     // io:println(response4);
     test:assertTrue(response4.properties.get("subject")=="Updated Bug Fix", "Response is not a Updated");
 }
@@ -81,7 +81,7 @@ isolated function createTicket() returns error? {
             "subject": "Customer Issue Report New"
         }
     };
-    SimplePublicObject|error response5 = check HubSpotClient->/crm/v3/objects/tickets.post(payload);
+    SimplePublicObject|error response5 = check HubSpotClient->/.post(payload);
     // io:println(response5);
     test:assertTrue(response5 is SimplePublicObject, "Response is not a SimplePublicObject");
     return;
@@ -96,7 +96,7 @@ isolated function archiveBatchTickets() returns error? {
         "ids": ["18392088916", "18392088928"],
         "inputs": []
     };
-    http:Response|error response6 = check HubSpotClient->/crm/v3/objects/tickets/batch/archive.post(payload);
+    http:Response|error response6 = check HubSpotClient->/batch/archive.post(payload);
     // io:println(response6);
     test:assertTrue(response6 is http:Response, "Response is not a http:Response");
     return;
@@ -127,7 +127,7 @@ isolated function createBatchTickets() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response7 = check HubSpotClient->/crm/v3/objects/tickets/batch/create.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response7 = check HubSpotClient->/batch/create.post(payload);
     // io:println(response7);
     test:assertTrue(response7 is BatchResponseSimplePublicObject, "Response is not a BatchResponseSimplePublicObject");
     return;
@@ -143,7 +143,7 @@ isolated function readBatchTickets() returns error? {
         "ids": ["18043215395", "18148225200", "18081930395", "18090272609"],
         "properties": ["subject", "hs_ticket_priority"],
         "inputs": []};
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response8 = check HubSpotClient->/crm/v3/objects/tickets/batch/read.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response8 = check HubSpotClient->/batch/read.post(payload);
     // io:println(response8);
     if (response8 is BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors) {
         test:assertTrue(response8.length() == 4, "Response is not a valid");
@@ -178,7 +178,7 @@ isolated function updateBatchTickets() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response9 = check HubSpotClient->/crm/v3/objects/tickets/batch/update.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response9 = check HubSpotClient->/batch/update.post(payload);
     // io:println(response9);
     test:assertTrue(response9 is BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors, "Error in updating the tickets");
     return;
@@ -203,7 +203,7 @@ isolated function createOrUpdateBatchTicketsByUniquePropertyValues() returns err
             }
         ]
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response10 = check HubSpotClient->/crm/v3/objects/tickets/batch/upsert.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response10 = check HubSpotClient->/batch/upsert.post(payload);
     // test:assertTrue(response10 is BatchResponseSimplePublicObject, "Error in creating or updating the tickets");
     io:println(response10);
     return;
@@ -218,7 +218,7 @@ isolated function mergeTickets() returns error? {
         "objectIdToMerge": "18088795290",
         "primaryObjectId": "18204824624"
     };
-    SimplePublicObject|error response11 = check HubSpotClient->/crm/v3/objects/tickets/merge.post(payload);
+    SimplePublicObject|error response11 = check HubSpotClient->/merge.post(payload);
     // io:println(response11);
     test:assertTrue(response11 is SimplePublicObject, "Response is not a SimplePublicObject");
     return;
@@ -245,7 +245,7 @@ isolated function searchTickets() returns error? {
             }
         ]
     };
-    CollectionResponseWithTotalSimplePublicObjectForwardPaging|error response12 = check HubSpotClient->/crm/v3/objects/tickets/search.post(payload);
+    CollectionResponseWithTotalSimplePublicObjectForwardPaging|error response12 = check HubSpotClient->/search.post(payload);
     if (response12 is CollectionResponseWithTotalSimplePublicObjectForwardPaging) {
         test:assertTrue(response12.length()>=0, "Response is not a CollectionResponseWithTotalSimplePublicObjectForwardPaging");
     } else {
