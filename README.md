@@ -10,9 +10,9 @@
 
 [//]: # (TODO: Add overview mentioning the purpose of the module, supported REST API versions, and other high-level details.)
 
-[HubSpot](https://www.hubspot.com/our-story?_gl=1*1m7vzmd*_gcl_au*Njg4NDk3MzE4LjE3MzQ2NjYzMTk.*_ga*MTA3NDk2NDE4MC4xNzM0NDk5Njkx*_ga_LXTM6CQ0XK*MTczNDY2NjMxOS41LjEuMTczNDY2NjMyNS41NC4wLjA.*_fplc*cERXeW0zUkg1USUyRjhZTWNpcCUyQno5c3N6dEJmakNLeG5SJTJCUDQlMkZpR0xJbzlSMmlKMWdXMk1QNmd1NDluTzhIUUxVOGpTVFBac0x1OURSRnJuYTJzdnBYTE4wU3FVOHdGa2dUWUJQOVQxVlFKZlVOdVhRdHZYdlMlMkZTWUhhS0duZyUzRCUzRA..&_ga=2.223926171.1279200748.1734499691-1074964180.1734499691) is a customer relationship management (CRM) platform widely used in marketing, sales, customer service, and operations which provides a range of tools and software solutions designed to help businesses attract, engage, and retain customers. 
+HubSpot is an AI-powered customer relationship management (CRM) platform. 
 
-The `ballerinax/hubspot.crm.object.tickets` package offers APIs to create and manage CRM records that represent customer service requests in a CRM. The tickets endpoints allow you to manage creation and manage ticket records, as well as sync ticket data between HubSpot and other systems, specifically based on HubSpot API v3.
+The `ballerinax/hubspot.crm.object.tickets` offers APIs to connect and interact with the [module-ballerinax-hubspot.crm.object.tickets](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/) endpoints, specifically based on the [Tickets endpoint reference](https://developers.hubspot.com/beta-docs/guides/api/crm/objects/tickets).
 
 ## Setup guide
 
