@@ -26,7 +26,7 @@ App Developer Accounts, allow you to create developer test accounts to test apps
 
 1. Go to **Test Account section** from the left sidebar.
 
-    <img src="docs/setup/resources/test_acc_img1.png" alt="hubspot developer portal" width="70%"/>
+    ![Test accounts](docs/setup/resources/test_acc_img1.png)
 
 2. Click **Create developer test account**.
 
