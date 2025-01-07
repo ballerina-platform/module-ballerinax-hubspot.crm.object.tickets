@@ -12,7 +12,7 @@
 
 HubSpot is an AI-powered customer relationship management (CRM) platform. 
 
-The `ballerinax/hubspot.crm.object.tickets` offers APIs to connect and interact with the [module-ballerinax-hubspot.crm.object.tickets](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/) endpoints, specifically based on the [Tickets endpoint reference](https://developers.hubspot.com/beta-docs/guides/api/crm/objects/tickets).
+The `ballerinax/hubspot.crm.object.tickets` offers APIs to connect and interact with the [HubSpot Tickets API](https://developers.hubspot.com/docs/guides/api/crm/objects/tickets) endpoints, specifically based on the [HubSpot API v3](https://developers.hubspot.com/docs/reference/api).
 
 ## Setup guide
 
