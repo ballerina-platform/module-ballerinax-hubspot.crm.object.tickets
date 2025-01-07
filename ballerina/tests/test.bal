@@ -1,3 +1,19 @@
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
+//
+// WSO2 LLC. licenses this file to you under the Apache License,
+// Version 2.0 (the "License"); you may not use this file except
+// in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
 import ballerina/test;
 import ballerina/oauth2;
 import ballerina/http;
@@ -27,7 +43,9 @@ final Client HubSpotClient = check new Client(config, "https://api.hubapi.com/cr
 
 isolated function getTickets() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response2 = check HubSpotClient->/.get();
-    test:assertTrue(response2.results.length() >= 0,"Response is not valid");
+    if (response2.results is SimplePublicObject[]) {
+        test:assertTrue(response2.results.length()>0, "No tickets found");
+    }
 }
 
 // Test case to create a new ticket
@@ -45,11 +63,11 @@ function createTicket() returns error? {
     };
     SimplePublicObject|error response5 = check HubSpotClient->/.post(payload);
     if (response5 is SimplePublicObject) {
-        test:assertTrue(response5.properties.get("hs_object_id") != null, "Response is not a valid");
-        test:assertTrue(response5.properties.get("subject") == "Auto generated Issue Report", "Response is not a valid");
-        test:assertTrue(response5.properties.get("hs_ticket_priority") == "LOW", "Response is not a valid");
-        test:assertTrue(response5.properties.get("hs_pipeline") == "0", "Response is not a valid");
-        string? createdTicketId = response5.properties.get("hs_object_id");
+        test:assertTrue(response5?.properties["hs_object_id"] != null, "Response is not a valid");
+        test:assertTrue(response5?.properties["subject"] == "Auto generated Issue Report", "Response is not a valid");
+        test:assertTrue(response5?.properties["hs_ticket_priority"] == "LOW", "Response is not a valid");
+        test:assertTrue(response5.properties["hs_pipeline"] == "0", "Response is not a valid");
+        string? createdTicketId = response5.properties["hs_object_id"];
         test:assertTrue(createdTicketId != null, "Response does not contain a valid ticket ID");
         ticketId = createdTicketId ?: "";
     }
@@ -66,9 +84,9 @@ function createTicket() returns error? {
 
 function getTicketById() returns error? {
     SimplePublicObjectWithAssociations response3 = check HubSpotClient->/[ticketId].get();
-    test:assertTrue(response3.properties.get("subject")=="Auto generated Issue Report", "Response is not correct");
-    test:assertTrue(response3.properties.get("hs_ticket_priority")=="LOW", "Response is not correct");
-    test:assertTrue(response3.properties.get("hs_pipeline")=="0", "Response is not correct");
+    test:assertTrue(response3?.properties["subject"]=="Auto generated Issue Report", "Response is not correct");
+    test:assertTrue(response3?.properties["hs_ticket_priority"]=="LOW", "Response is not correct");
+    test:assertTrue(response3?.properties["hs_pipeline"]=="0", "Response is not correct");
 }
 
 // Test to check Update the ticket by id
@@ -86,9 +104,9 @@ function updateTicketById() returns error? {
         }
     };
     SimplePublicObject response4 = check HubSpotClient->/[ticketId].patch(payload);
-    test:assertTrue(response4.properties.get("subject")=="Updated Bug Fix", "Response is not a Updated");
-    test:assertTrue(response4.properties.get("hs_ticket_priority")=="HIGH", "Response is not a Updated");
-    test:assertTrue(response4.properties.get("hs_pipeline")=="0", "Response is not a Updated");
+    test:assertTrue(response4?.properties["subject"]=="Updated Bug Fix", "Response is not a Updated");
+    test:assertTrue(response4?.properties["hs_ticket_priority"]=="HIGH", "Response is not a Updated");
+    test:assertTrue(response4?.properties["hs_pipeline"]=="0", "Response is not a Updated");
 }
 
 // Test to create a batch of tickets
@@ -119,8 +137,8 @@ function createBatchTickets() returns error? {
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response7 = check HubSpotClient->/batch/create.post(payload);
     if (response7 is BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors) {
         test:assertTrue(response7.status == "COMPLETE", "Response is not a valid");
-        string? createdBatchId1 = response7.results[0].id;
-        string? createdBatchId2 = response7.results[1].id;
+        string? createdBatchId1 = response7?.results[0].id;
+        string? createdBatchId2 = response7?.results[1].id;
         batchTicketId1 = createdBatchId1 ?: "";
         batchTicketId2 = createdBatchId2 ?: "";
     } else {
