@@ -1,37 +1,35 @@
 ## Overview
 
-[//]: # (TODO: Add overview mentioning the purpose of the module, supported REST API versions, and other high-level details.)
-[HubSpot](https://www.hubspot.com/our-story?_gl=1*1m7vzmd*_gcl_au*Njg4NDk3MzE4LjE3MzQ2NjYzMTk.*_ga*MTA3NDk2NDE4MC4xNzM0NDk5Njkx*_ga_LXTM6CQ0XK*MTczNDY2NjMxOS41LjEuMTczNDY2NjMyNS41NC4wLjA.*_fplc*cERXeW0zUkg1USUyRjhZTWNpcCUyQno5c3N6dEJmakNLeG5SJTJCUDQlMkZpR0xJbzlSMmlKMWdXMk1QNmd1NDluTzhIUUxVOGpTVFBac0x1OURSRnJuYTJzdnBYTE4wU3FVOHdGa2dUWUJQOVQxVlFKZlVOdVhRdHZYdlMlMkZTWUhhS0duZyUzRCUzRA..&_ga=2.223926171.1279200748.1734499691-1074964180.1734499691) is a customer relationship management (CRM) platform widely used in marketing, sales, customer service, and operations which provides a range of tools and software solutions designed to help businesses attract, engage, and retain customers. 
+HubSpot is an AI-powered customer relationship management (CRM) platform. 
 
-The `ballerinax/hubspot.crm.object.tickets` package offers APIs to create and manage CRM records that represent customer service requests in a CRM. The tickets endpoints allow you to manage creation and manage ticket records, as well as sync ticket data between HubSpot and other systems, specifically based on HubSpot API v3.
+The `ballerinax/hubspot.crm.object.tickets` offers APIs to connect and interact with the [HubSpot Tickets API](https://developers.hubspot.com/docs/guides/api/crm/objects/tickets) endpoints, specifically based on the [HubSpot API v3](https://developers.hubspot.com/docs/reference/api).
 
 ## Setup guide
 
-[//]: # (TODO: Add detailed steps to obtain credentials and configure the module.)
 To use the `HubSpot CRM Object Tickets` connector, you must have access to the HubSpot API through a HubSpot developer account and an app under it. If you do not have a HubSpot developer account, you can sign up for one [here](https://developers.hubspot.com/get-started).
 
 ### Step 1: Create a HubSpot Developer Account
 
 App Developer Accounts, allow you to create developer test accounts to test apps.
 
-**_These accounts are only for development and testing purposes. Not to be used in production._**
+> **Note:** These accounts are only for development and testing purposes. Not to be used in production.
 
-1. Go to **Test Account section** from the left sidebar.
+1. Go to "Test Account section" from the left sidebar.
 
-    <img src="../docs/setup/resources/test_acc_img1.png" alt="hubspot developer portal" width="70%"/>
+    ![Test accounts](../docs/setup/resources/test_acc_img1.png)
 
-2. Click **Create developer test account**.
+2. Click "Create developer test account".
 
-   <img src="../docs/setup/resources/test_acc_img2.png" alt="Hubspot developer testacc" style="width: 70%;">
+   ![Developer Test Accounts](../docs/setup/resources/test_acc_img2.png)
 
-3. In the next dialogue box, give a name to your test account and enter create.
+3. In the next dialogue box, give a name to your test account and click "Create".
 
-   <img src="../docs/setup/resources/test_acc_img3.png" alt="Hubspot developer testacc name" style="width: 70%;">
+   ![Hubspot developer account name](../docs/setup/resources/test_acc_img3.png)
 
 ### Step 2: Create a HubSpot App under your account.
 
-1. In your developer account, navigate to the **"Apps"** section. Click on **"Create App"**
-   <img src="../docs/setup/resources/app_img1.png" alt="Hubspot app creation 1 testacc" style="width: 70%;">
+1. In your developer account, navigate to the "Apps" section. Click on "Create App".
+   ![Hubspot App Creation](../docs/setup/resources/app_img1.png)
 
 2. Provide the necessary details, including the app name and description.
 
@@ -39,24 +37,24 @@ App Developer Accounts, allow you to create developer test accounts to test apps
 
 1. Move to the Auth Tab.
 
-   <img src="../docs/setup/resources/auth.png" alt="Hubspot app auth tab" style="width: 70%;">
+   ![Auth tab](../docs/setup/resources/auth.png)
 
-2. In the **Scopes** section, add the following scopes for your app using the **"Add new scope"** button.
+2. In the "Scopes" section, add the following scopes for your app using the "Add new scope" button.
 
-   `tickets`
-   `oath`
+   * `tickets`
+   * `oath`
 
-   <img src="../docs/setup/resources/scope_select.png" alt="Scope selection" style="width: 70%;">
+   ![Scope Selection](../docs/setup/resources/scope_select.png)
 
-3. Add your **Redirect URI** in the relevant section. You can use localhost addresses for local development purposes. Then Click **Create App**.
+3. Add your Redirect URI in the relevant section. You can use `localhost` addresses for local development purposes. Then Click "Create App".
 
-   <img src="../docs/setup/resources/redirect_url.png" alt="Redirect URI" style="width: 70%;">
+   ![Redirect URI](../docs/setup/resources/redirect_url.png)
 
 ### Step 4: Get your Client ID and Client Secret
 
-- Navigate to the **Auth section** of your app. Make sure to save the provided Client ID and Client Secret.
+- Navigate to the "Auth" tab. Make sure to save the provided Client ID and Client Secret.
 
-   <img src="../docs/setup/resources/credentials.png" alt="Credentials" style="width: 70%;">
+   ![Credentials](../docs/setup/resources/credentials.png)
 
 ### Step 5: Setup Authentication Flow
 
@@ -70,13 +68,10 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with the above obtained values.
 
-2. Paste it in the browser and select your developer test account to intall the app when prompted.
+2. Paste it in the browser and select your developer test account to install the app when prompted.
 
 3. A code will be displayed in the browser. Copy that code.
 
-   ```
-   Received code: na1-129d-860c-xxxx-xxxx-xxxxxxxxxxxx
-   ```
 
 4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
 
@@ -111,9 +106,9 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 5. Store the access token and refresh token securely for use in your application.
 
-## Quickstart
 
-[//]: # (TODO: Add a quickstart guide to demonstrate a basic functionality of the module, including sample code snippets.)
+
+## Quickstart
 
 To use the `HubSpot CRM Object Tickets` connector in your Ballerina application, update the `.bal` file as follows:
 
@@ -128,7 +123,7 @@ import ballerina/oauth2;
 
 ### Step 2: Instantiate a new connector
 
-1. Create a `Config.toml` file and, configure the obtained credentials obtained in the above steps as follows:
+1. Create a `Config.toml` file inside the Ballerina package and add the following configurations with the values retrieved in the earlier steps as follows:
 
    ```toml
     clientId = <Client Id>
@@ -151,10 +146,8 @@ import ballerina/oauth2;
    };
 
    ConnectionConfig config = {auth};
-   final Client HubSpotClient = check new Client(config, "https://api.hubapi.com");
+   final Client HubSpotClient = check new Client(config);
    ```
-
-### Step 3: Invoke the connector operation
 
 Now, utilize the available connector operations. A sample usecase is shown below.
 
@@ -180,4 +173,4 @@ public function main() returns error? {
 
 The `HubSpot CRM Object Tickets` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.crm.object.tickets/tree/main/examples/), covering the following use cases:
 
-[//]: # (TODO: Add examples)
+

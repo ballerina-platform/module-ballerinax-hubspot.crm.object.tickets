@@ -2,9 +2,7 @@
 
 [![Build](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/actions/workflows/ci.yml)
 [![Trivy](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/actions/workflows/trivy-scan.yml)
-[![GraalVM Check](https://gi'Authorization': 'Bearer YOUR_EMAIL_API_KEY',
-          'Content-Type': 'application/json',
-        },thub.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/actions/workflows/build-with-bal-test-graalvm.yml)
+[![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/actions/workflows/build-with-bal-test-graalvm.yml)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/commits/master)
 [![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/hubspot.crm.object.tickets.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%hubspot.crm.object.tickets)
 
@@ -22,24 +20,24 @@ To use the `HubSpot CRM Object Tickets` connector, you must have access to the H
 
 App Developer Accounts, allow you to create developer test accounts to test apps.
 
-**_These accounts are only for development and testing purposes. Not to be used in production._**
+> **Note:** These accounts are only for development and testing purposes. Not to be used in production.
 
-1. Go to **Test Account section** from the left sidebar.
+1. Go to "Test Account section" from the left sidebar.
 
     ![Test accounts](docs/setup/resources/test_acc_img1.png)
 
-2. Click **Create developer test account**.
+2. Click "Create developer test account".
 
-   <img src="docs/setup/resources/test_acc_img2.png" alt="Hubspot developer testacc" style="width: 70%;">
+   ![Developer Test Accounts](docs/setup/resources/test_acc_img2.png)
 
-3. In the next dialogue box, give a name to your test account and enter create.
+3. In the next dialogue box, give a name to your test account and click "Create".
 
-   <img src="docs/setup/resources/test_acc_img3.png" alt="Hubspot developer testacc name" style="width: 70%;">
+   ![Hubspot developer account name](docs/setup/resources/test_acc_img3.png)
 
 ### Step 2: Create a HubSpot App under your account.
 
-1. In your developer account, navigate to the **"Apps"** section. Click on **"Create App"**
-   <img src="docs/setup/resources/app_img1.png" alt="Hubspot app creation 1 testacc" style="width: 70%;">
+1. In your developer account, navigate to the "Apps" section. Click on "Create App".
+   ![Hubspot App Creation](docs/setup/resources/app_img1.png)
 
 2. Provide the necessary details, including the app name and description.
 
@@ -47,24 +45,24 @@ App Developer Accounts, allow you to create developer test accounts to test apps
 
 1. Move to the Auth Tab.
 
-   <img src="docs/setup/resources/auth.png" alt="Hubspot app auth tab" style="width: 70%;">
+   ![Auth tab](docs/setup/resources/auth.png)
 
-2. In the **Scopes** section, add the following scopes for your app using the **"Add new scope"** button.
+2. In the "Scopes" section, add the following scopes for your app using the "Add new scope" button.
 
-   `tickets`
-   `oath`
+   * `tickets`
+   * `oath`
 
-   <img src="docs/setup/resources/scope_select.png" alt="Scope selection" style="width: 70%;">
+   ![Scope Selection](docs/setup/resources/scope_select.png)
 
-3. Add your **Redirect URI** in the relevant section. You can use localhost addresses for local development purposes. Then Click **Create App**.
+3. Add your Redirect URI in the relevant section. You can use `localhost` addresses for local development purposes. Then Click "Create App".
 
-   <img src="docs/setup/resources/redirect_url.png" alt="Redirect URI" style="width: 70%;">
+   ![Redirect URI](docs/setup/resources/redirect_url.png)
 
 ### Step 4: Get your Client ID and Client Secret
 
-- Navigate to the **Auth section** of your app. Make sure to save the provided Client ID and Client Secret.
+- Navigate to the "Auth" tab. Make sure to save the provided Client ID and Client Secret.
 
-   <img src="docs/setup/resources/credentials.png" alt="Credentials" style="width: 70%;">
+   ![Credentials](docs/setup/resources/credentials.png)
 
 ### Step 5: Setup Authentication Flow
 
@@ -78,13 +76,10 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with the above obtained values.
 
-2. Paste it in the browser and select your developer test account to intall the app when prompted.
+2. Paste it in the browser and select your developer test account to install the app when prompted.
 
 3. A code will be displayed in the browser. Copy that code.
 
-   ```
-   Received code: na1-129d-860c-xxxx-xxxx-xxxxxxxxxxxx
-   ```
 
 4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
 
@@ -136,7 +131,7 @@ import ballerina/oauth2;
 
 ### Step 2: Instantiate a new connector
 
-1. Create a `Config.toml` file and, configure the obtained credentials obtained in the above steps as follows:
+1. Create a `Config.toml` file inside the Ballerina package and add the following configurations with the values retrieved in the earlier steps as follows:
 
    ```toml
     clientId = <Client Id>
@@ -159,10 +154,8 @@ import ballerina/oauth2;
    };
 
    ConnectionConfig config = {auth};
-   final Client HubSpotClient = check new Client(config, "https://api.hubapi.com");
+   final Client HubSpotClient = check new Client(config);
    ```
-
-### Step 3: Invoke the connector operation
 
 Now, utilize the available connector operations. A sample usecase is shown below.
 

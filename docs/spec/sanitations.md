@@ -33,4 +33,3 @@ The following command was used to generate the Ballerina client from the OpenAPI
 ```bash
 bal openapi -i docs/spec/openapi.json --mode client -o ballerina
 ```
-Note: The license year is hardcoded to 2024, change if necessary
