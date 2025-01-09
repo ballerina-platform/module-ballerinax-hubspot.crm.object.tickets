@@ -2,14 +2,19 @@
 
 The `ballerinax/hubspot.crm.object.tickets` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. [Ticket Management System](./ticket-management-system/) - Integrate HubSpot with multiple customer support channels to streamline ticket management.
+2. [Weekly Ticket Reports](./weekly-ticket-reports/) - Analyze detailed summaries of customer tickets in each week for better support.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+1. Refer the [Setup Guide](../README.md) to create your HubSpot account if you do not have one already.
 
+2. For each example, create a `Config.toml` file in the example root directory. Here's an example of how your Config.toml file should look:
+```
+clientId = "<clientId>"
+clientSecret = "<clientSecret>"
+refreshToken = "<refreshToken>"
+```
 ## Running an example
 
 Execute the following commands to build an example from the source:
