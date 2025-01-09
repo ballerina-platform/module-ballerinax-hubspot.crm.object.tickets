@@ -1,6 +1,5 @@
 import ballerina/io;
 import ballerina/oauth2;
-// import ballerina/http;
 import ballerinax/hubspot.crm.obj.tickets as hstickets;
 
 configurable string clientId = ?;
@@ -19,8 +18,7 @@ hstickets:OAuth2RefreshTokenGrantConfig auth = {
     credentialBearer: oauth2:POST_BODY_BEARER 
 };
 
-hstickets:ConnectionConfig config = {auth};
-final hstickets:Client TicketClient = check new hstickets:Client(config);
+final hstickets:Client TicketClient = check new hstickets:Client({auth});
 
 public function main() returns error? {
     hstickets:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging ticketList = check TicketClient->/.get();
@@ -29,9 +27,9 @@ public function main() returns error? {
     int highPriorityTickets = 0;
     int mediumPriorityTickets = 0;
     foreach var ticket in ticketList.results {
-        if (ticket?.properties["hs_ticket_priority"] == "HIGH") {
+        if ticket?.properties["hs_ticket_priority"] == "HIGH" {
             highPriorityTickets = highPriorityTickets + 1;
-        } else if (ticket?.properties["hs_ticket_priority"] == "MEDIUM") {
+        } else if ticket?.properties["hs_ticket_priority"] == "MEDIUM" {
             mediumPriorityTickets = mediumPriorityTickets + 1;
         } else {
             lowPriorityTickets = lowPriorityTickets + 1;
@@ -41,11 +39,11 @@ public function main() returns error? {
     int technicalPipelineTickets = 0;
     int salesPipelineTickets = 0;
     foreach var ticket in ticketList.results {
-        if (ticket?.properties["hs_pipeline"]== "0") {
+        if ticket?.properties["hs_pipeline"]== "0" {
             supportPipelineTickets = supportPipelineTickets + 1;
-        } else if (ticket?.properties["hs_pipeline"]== "676185170") {
+        } else if ticket?.properties["hs_pipeline"]== "676185170" {
             technicalPipelineTickets = technicalPipelineTickets + 1;
-        } else if (ticket?.properties["hs_pipeline"]== "675912198") {
+        } else if ticket?.properties["hs_pipeline"]== "675912198" {
             salesPipelineTickets = salesPipelineTickets + 1;
         }
     }

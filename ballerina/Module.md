@@ -1,8 +1,8 @@
 ## Overview
 
-HubSpot is an AI-powered customer relationship management (CRM) platform. 
+[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform. 
 
-The `ballerinax/hubspot.crm.object.tickets` offers APIs to connect and interact with the [HubSpot Tickets API](https://developers.hubspot.com/docs/guides/api/crm/objects/tickets) endpoints, specifically based on the [HubSpot API v3](https://developers.hubspot.com/docs/reference/api).
+The `ballerinax/hubspot.crm.object.tickets` offers APIs to connect and interact with the [HubSpot Tickets API](https://developers.hubspot.com/docs/guides/api/crm/objects/tickets) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api).
 
 ## Setup guide
 
@@ -113,10 +113,10 @@ To use the `HubSpot CRM Object Tickets` connector in your Ballerina application,
 
 ### Step 1: Import the module
 
-Import the `hubspot.crm.objects.tickets` module and `oauth2` module.
+Import the `hubspot.crm.obj.tickets` module and `oauth2` module.
 
 ```ballerina
-import ballerinax/hubspot.crm.object.tickets as hstickets;
+import ballerinax/hubspot.crm.obj.tickets as hstickets;
 import ballerina/oauth2;
 ```
 
@@ -144,17 +144,16 @@ import ballerina/oauth2;
       credentialBearer: oauth2:POST_BODY_BEARER 
    };
 
-   ConnectionConfig config = {auth};
-   final Client HubSpotClient = check new Client(config);
+   final Client HubSpotClient = check new ({auth});
    ```
 
-Now, utilize the available connector operations. A sample usecase is shown below.
+Now, utilize the available connector operations. A sample use case is shown below.
 
 #### Create a New Ticket
 
 ```ballerina
 public function main() returns error? {
-    SimplePublicObjectInputForCreate payload = {
+    hstickets:SimplePublicObjectInputForCreate payload = {
         properties: {
             "hs_pipeline": "0",
             "hs_pipeline_stage": "1",
@@ -162,9 +161,8 @@ public function main() returns error? {
             "subject": "New troubleshoot report"
         }
     };
-    SimplePublicObject response = check HubSpotClient->/crm/v3/objects/tickets.post(payload);
-    io:println(response5);
-    return;
+    hstickets:SimplePublicObject response = check HubSpotClient->/crm/v3/objects/tickets.post(payload);
+    io:println(response);
 }
 ```
 

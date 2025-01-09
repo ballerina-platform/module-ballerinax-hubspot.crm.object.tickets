@@ -4,9 +4,7 @@ This use case demonstrates how the `HubSpot Tickets API`  can be utilized to str
 
 ## Prerequisites
 
-1. Refer the [Setup Guide](../README.md) to create your HubSpot account if you do not have one already.
-
-2. For each example, create a `Config.toml` file in the example root directory. Here's an example of how your Config.toml file should look:
+For each example, create a `Config.toml` file in the example root directory. Here's an example of how your Config.toml file should look:
 ```
 clientId = "<clientId>"
 clientSecret = "<clientSecret>"

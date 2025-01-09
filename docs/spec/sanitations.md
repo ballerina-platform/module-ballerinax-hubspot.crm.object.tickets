@@ -10,7 +10,6 @@ The OpenAPI specification is obtained from [Tickets OpenAPI](https://github.com/
 
 These changes are done in order to improve the overall usability, and as workarounds for some known language limitations.
 
-[//]: # (TODO: Add sanitation details)
 1. **Changed the date-time type mentioned in openapi.json to datetime**
 
 2. **Change the url property of the servers object:**
