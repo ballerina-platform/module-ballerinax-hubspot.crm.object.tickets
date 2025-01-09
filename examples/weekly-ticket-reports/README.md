@@ -1,8 +1,6 @@
 # HubSpot Weekly Tickets Report Generation
 
-This use case demonstrates how the `HubSpot Tickets API`  can be utilized to improve customer service quality by 
-generating regular reports summarizing the details of customer support tickets.<br>
-This functionality helps in strea
+This use case demonstrates how the `HubSpot Tickets API`  can be utilized to improve customer service quality by generating regular reports summarizing the details of customer support tickets which helps in streamlining the support process and decision making.
 
 ## Prerequisites
 
