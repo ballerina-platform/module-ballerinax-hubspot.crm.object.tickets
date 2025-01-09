@@ -15,7 +15,7 @@ hstickets:OAuth2RefreshTokenGrantConfig auth = {
     clientId,
     clientSecret,
     refreshToken,
-    credentialBearer: oauth2:POST_BODY_BEARER 
+    credentialBearer: oauth2:POST_BODY_BEARER
 };
 
 final hstickets:Client TicketClient = check new ({auth});
@@ -39,15 +39,15 @@ public function main() returns error? {
     int technicalPipelineTickets = 0;
     int salesPipelineTickets = 0;
     foreach var ticket in ticketList.results {
-        if ticket?.properties["hs_pipeline"]== "0" {
+        if ticket?.properties["hs_pipeline"] == "0" {
             supportPipelineTickets = supportPipelineTickets + 1;
-        } else if ticket?.properties["hs_pipeline"]== "676185170" {
+        } else if ticket?.properties["hs_pipeline"] == "676185170" {
             technicalPipelineTickets = technicalPipelineTickets + 1;
-        } else if ticket?.properties["hs_pipeline"]== "675912198" {
+        } else if ticket?.properties["hs_pipeline"] == "675912198" {
             salesPipelineTickets = salesPipelineTickets + 1;
         }
     }
-    
+
     string report = string `
         Weekly Ticket Report:
         - Total Tickets: ${totalTickets}

@@ -1,6 +1,6 @@
+import ballerina/http;
 import ballerina/io;
 import ballerina/oauth2;
-import ballerina/http;
 import ballerinax/hubspot.crm.obj.tickets as hstickets;
 
 configurable string clientId = ?;
@@ -16,7 +16,7 @@ hstickets:OAuth2RefreshTokenGrantConfig auth = {
     clientId,
     clientSecret,
     refreshToken,
-    credentialBearer: oauth2:POST_BODY_BEARER 
+    credentialBearer: oauth2:POST_BODY_BEARER
 };
 
 final hstickets:Client hubspot = check new ({auth});
@@ -87,7 +87,7 @@ public function main() returns error? {
                     "content": "This is a sample ticket 3 created using Ballerina"
                 }
             }
-        ]    
+        ]
     };
     hstickets:BatchResponseSimplePublicObject createdBatchResponse = check hubspot->/batch/create.post(batchCreatePayload);
     io:println("Created Batch Ticket Response:", createdBatchResponse);
