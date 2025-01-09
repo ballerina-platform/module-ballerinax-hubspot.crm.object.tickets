@@ -18,7 +18,7 @@ hstickets:OAuth2RefreshTokenGrantConfig auth = {
     credentialBearer: oauth2:POST_BODY_BEARER 
 };
 
-final hstickets:Client TicketClient = check new hstickets:Client({auth});
+final hstickets:Client TicketClient = check new ({auth});
 
 public function main() returns error? {
     hstickets:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging ticketList = check TicketClient->/.get();

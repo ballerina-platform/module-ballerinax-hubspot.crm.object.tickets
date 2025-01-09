@@ -5,11 +5,5 @@ version = "0.1.0"
 distribution = "2201.10.3"
 repository = "local"
 
-[[dependency]]
-org = "ballerinax"
-name = "hubspot.crm.obj.tickets"
-version = "1.0.0"
-repository = "local"
-
 [build-options]
 observabilityIncluded = true

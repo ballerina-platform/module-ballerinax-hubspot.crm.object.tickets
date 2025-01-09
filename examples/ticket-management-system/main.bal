@@ -19,7 +19,7 @@ hstickets:OAuth2RefreshTokenGrantConfig auth = {
     credentialBearer: oauth2:POST_BODY_BEARER 
 };
 
-final hstickets:Client TicketClient = check new hstickets:Client({auth});
+final hstickets:Client hubspot = check new ({auth});
 
 public function main() returns error? {
     // Ticket creation
@@ -32,12 +32,12 @@ public function main() returns error? {
             "content": "This is a sample ticket created using Ballerina"
         }
     };
-    hstickets:SimplePublicObject createdTicket = check TicketClient->/.post(payload);
+    hstickets:SimplePublicObject createdTicket = check hubspot->/.post(payload);
     io:println("Created Ticket:", createdTicket);
     createdTicketId = createdTicket.id;
 
     // Ticket read
-    hstickets:SimplePublicObjectWithAssociations readTicket = check TicketClient->/[createdTicketId].get();
+    hstickets:SimplePublicObjectWithAssociations readTicket = check hubspot->/[createdTicketId].get();
     io:println("Read Ticket:", readTicket);
 
     // Ticket update
@@ -50,11 +50,11 @@ public function main() returns error? {
             "content": "This is a sample ticket updated using Ballerina"
         }
     };
-    hstickets:SimplePublicObject updatedTicket = check TicketClient->/[createdTicketId].patch(updatePayload);
+    hstickets:SimplePublicObject updatedTicket = check hubspot->/[createdTicketId].patch(updatePayload);
     io:println("Updated Ticket:", updatedTicket);
 
     // Ticket deletion
-    http:Response deletedResponse = check TicketClient->/[createdTicketId].delete();
+    http:Response deletedResponse = check hubspot->/[createdTicketId].delete();
     io:println("Deleted Ticket:", deletedResponse);
 
     // Batch ticket creation
@@ -89,7 +89,7 @@ public function main() returns error? {
             }
         ]    
     };
-    hstickets:BatchResponseSimplePublicObject createdBatchResponse = check TicketClient->/batch/create.post(batchCreatePayload);
+    hstickets:BatchResponseSimplePublicObject createdBatchResponse = check hubspot->/batch/create.post(batchCreatePayload);
     io:println("Created Batch Ticket Response:", createdBatchResponse);
     batchTicketId1 = createdBatchResponse.results[0].id;
     batchTicketId2 = createdBatchResponse.results[1].id;
@@ -102,7 +102,7 @@ public function main() returns error? {
         "properties": ["subject", "hs_pipeline", "hs_pipeline_stage", "hs_ticket_priority", "content"],
         "inputs": []
     };
-    hstickets:BatchResponseSimplePublicObject batchReadResponse = check TicketClient->/batch/read.post(batchReadPayload);
+    hstickets:BatchResponseSimplePublicObject batchReadResponse = check hubspot->/batch/read.post(batchReadPayload);
     io:println("Batch Read Ticket Response:", batchReadResponse);
 
     // Batch ticket update
@@ -140,6 +140,6 @@ public function main() returns error? {
             }
         ]
     };
-    hstickets:BatchResponseSimplePublicObject batchUpdateResponse = check TicketClient->/batch/update.post(batchUpdatePayload);
+    hstickets:BatchResponseSimplePublicObject batchUpdateResponse = check hubspot->/batch/update.post(batchUpdatePayload);
     io:println("Batch Update Ticket Response:", batchUpdateResponse);
 }

@@ -72,7 +72,6 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 3. A code will be displayed in the browser. Copy that code.
 
-
 4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
 
    - Linux/macOS
@@ -105,8 +104,6 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
    ```
 
 5. Store the access token and refresh token securely for use in your application.
-
-
 
 ## Quickstart
 
@@ -162,7 +159,7 @@ public function main() returns error? {
             "subject": "New troubleshoot report"
         }
     };
-    hstickets:SimplePublicObject response = check HubSpotClient->/crm/v3/objects/tickets.post(payload);
+    hstickets:SimplePublicObject response = check HubSpotClient->/.post(payload);
     io:println(response);
 }
 ```
@@ -170,6 +167,5 @@ public function main() returns error? {
 ## Examples
 
 The `HubSpot CRM Object Tickets` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.tickets/tree/main/examples), covering the following use cases:
-   1. [Ticket Management System](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/tree/main/examples/ticket-management-system)
-   2. [Weekly Tickets Report Generation](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/tree/main/examples/weekly-ticket-reports)
-
+   1. [Ticket Management System](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/tree/main/examples/ticket-management-system) - Integrate HubSpot with multiple customer support channels to streamline ticket management.
+   2. [Weekly Tickets Report Generation](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/tree/main/examples/weekly-ticket-reports) - Analyze detailed summaries of customer tickets in each week for better support.

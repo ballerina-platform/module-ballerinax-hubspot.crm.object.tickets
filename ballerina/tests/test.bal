@@ -33,8 +33,7 @@ OAuth2RefreshTokenGrantConfig auth = {
     credentialBearer: oauth2:POST_BODY_BEARER
 };
 
-ConnectionConfig config = {auth};
-final Client HubSpotClient = check new Client(config, "https://api.hubapi.com/crm/v3/objects/tickets");
+final Client HubSpotClient = check new Client({auth});
 
 // Test to get a list of all tickets
 @test:Config {
