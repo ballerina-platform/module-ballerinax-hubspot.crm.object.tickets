@@ -19,8 +19,7 @@ hstickets:OAuth2RefreshTokenGrantConfig auth = {
     credentialBearer: oauth2:POST_BODY_BEARER 
 };
 
-hstickets:ConnectionConfig config = {auth};
-final hstickets:Client TicketClient = check new hstickets:Client(config);
+final hstickets:Client TicketClient = check new hstickets:Client({auth});
 
 public function main() returns error? {
     // Ticket creation
