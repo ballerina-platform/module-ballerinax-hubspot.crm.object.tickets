@@ -24,20 +24,20 @@ App Developer Accounts, allow you to create developer test accounts to test apps
 
 1. Go to "Test Account section" from the left sidebar.
 
-    ![Test accounts](docs/setup/resources/test_acc_img1.png)
+    ![Test accounts](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/test_acc_img1.png)
 
 2. Click "Create developer test account".
 
-   ![Developer Test Accounts](docs/setup/resources/test_acc_img2.png)
+   ![Developer Test Accounts](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/test_acc_img2.png)
 
 3. In the next dialogue box, give a name to your test account and click "Create".
 
-   ![Hubspot developer account name](docs/setup/resources/test_acc_img3.png)
+   ![Hubspot developer account name](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/test_acc_img3.png)
 
 ### Step 2: Create a HubSpot App under your account.
 
 1. In your developer account, navigate to the "Apps" section. Click on "Create App".
-   ![Hubspot App Creation](docs/setup/resources/app_img1.png)
+   ![Hubspot App Creation](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/app_img1.png)
 
 2. Provide the necessary details, including the app name and description.
 
@@ -45,24 +45,24 @@ App Developer Accounts, allow you to create developer test accounts to test apps
 
 1. Move to the Auth Tab.
 
-   ![Auth tab](docs/setup/resources/auth.png)
+   ![Auth tab](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/auth.png)
 
 2. In the "Scopes" section, add the following scopes for your app using the "Add new scope" button.
 
    * `tickets`
    * `oath`
 
-   ![Scope Selection](docs/setup/resources/scope_select.png)
+   ![Scope Selection](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/scope_select.png)
 
 3. Add your Redirect URI in the relevant section. You can use `localhost` addresses for local development purposes. Then Click "Create App".
 
-   ![Redirect URI](docs/setup/resources/redirect_url.png)
+   ![Redirect URI](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/redirect_url.png)
 
 ### Step 4: Get your Client ID and Client Secret
 
 - Navigate to the "Auth" tab. Make sure to save the provided Client ID and Client Secret.
 
-   ![Credentials](docs/setup/resources/credentials.png)
+   ![Credentials](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/credentials.png)
 
 ### Step 5: Setup Authentication Flow
 
