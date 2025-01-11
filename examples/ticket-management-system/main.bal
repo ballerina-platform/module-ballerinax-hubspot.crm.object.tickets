@@ -1,3 +1,19 @@
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
+//
+// WSO2 LLC. licenses this file to you under the Apache License,
+// Version 2.0 (the "License"); you may not use this file except
+// in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
 import ballerina/http;
 import ballerina/io;
 import ballerina/oauth2;
@@ -34,11 +50,13 @@ public function main() returns error? {
     };
     hstickets:SimplePublicObject createdTicket = check hubspot->/.post(payload);
     io:println("Created Ticket:", createdTicket);
+    io:println();
     createdTicketId = createdTicket.id;
 
     // Ticket read
     hstickets:SimplePublicObjectWithAssociations readTicket = check hubspot->/[createdTicketId].get();
     io:println("Read Ticket:", readTicket);
+    io:println();
 
     // Ticket update
     hstickets:SimplePublicObjectInput updatePayload = {
@@ -52,10 +70,12 @@ public function main() returns error? {
     };
     hstickets:SimplePublicObject updatedTicket = check hubspot->/[createdTicketId].patch(updatePayload);
     io:println("Updated Ticket:", updatedTicket);
+    io:println();
 
     // Ticket deletion
     http:Response deletedResponse = check hubspot->/[createdTicketId].delete();
     io:println("Deleted Ticket:", deletedResponse);
+    io:println();
 
     // Batch ticket creation
     hstickets:BatchInputSimplePublicObjectInputForCreate batchCreatePayload = {
@@ -104,6 +124,7 @@ public function main() returns error? {
     };
     hstickets:BatchResponseSimplePublicObject batchReadResponse = check hubspot->/batch/read.post(batchReadPayload);
     io:println("Batch Read Ticket Response:", batchReadResponse);
+    io:println();
 
     // Batch ticket update
     hstickets:BatchInputSimplePublicObjectBatchInput batchUpdatePayload = {
