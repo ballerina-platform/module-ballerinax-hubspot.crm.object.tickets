@@ -42,7 +42,7 @@ App Developer Accounts, allow you to create developer test accounts to test apps
 2. In the "Scopes" section, add the following scopes for your app using the "Add new scope" button.
 
    * `tickets`
-   * `oath`
+   * `oauth`
 
    ![Scope Selection](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/scope_select.png)
 
