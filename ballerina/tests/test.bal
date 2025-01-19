@@ -16,28 +16,42 @@
 
 import ballerina/http;
 import ballerina/oauth2;
+import ballerina/os;
 import ballerina/test;
 
-configurable string clientId = ?;
-configurable string clientSecret = ?;
-configurable string refreshToken = ?;
+final boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
+final string serviceUrl = isLiveServer ? "https://api.hubapi.com/crm/v3/objects/tickets" : "http://localhost:9090";
+
+final string clientId = os:getEnv("HUBSPOT_CLIENT_ID");
+final string clientSecret = os:getEnv("HUBSPOT_CLIENT_SECRET");
+final string refreshToken = os:getEnv("HUBSPOT_REFRESH_TOKEN");
+
+final Client HubSpotClient = check initClient();
+
+isolated function initClient() returns Client|error {
+    if isLiveServer {
+        OAuth2RefreshTokenGrantConfig auth = {
+            clientId,
+            clientSecret,
+            refreshToken,
+            credentialBearer: oauth2:POST_BODY_BEARER
+        };
+        return check new ({auth}, serviceUrl);
+    }
+    return check new ({
+        auth: {
+            token: "test-token"
+        }
+    }, serviceUrl);
+}
 
 string ticketId = "";
 string batchTicketId1 = "";
 string batchTicketId2 = "";
 
-OAuth2RefreshTokenGrantConfig auth = {
-    clientId,
-    clientSecret,
-    refreshToken,
-    credentialBearer: oauth2:POST_BODY_BEARER
-};
-
-final Client HubSpotClient = check new Client({auth});
-
 // Test to get a list of all tickets
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests", "mock_tests"]
 }
 isolated function getTickets() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check HubSpotClient->/.get();
@@ -48,7 +62,7 @@ isolated function getTickets() returns error? {
 
 // Test case to create a new ticket
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests", "mock_tests"]
 }
 function createTicket() returns error? {
     SimplePublicObjectInputForCreate payload = {
@@ -73,7 +87,7 @@ function createTicket() returns error? {
 
 // Test case to get the ticket by id
 @test:Config {
-    groups: ["live_tests"],
+    groups: ["live_tests", "mock_tests"],
     dependsOn: [createTicket]
 }
 function getTicketById() returns error? {
@@ -86,7 +100,8 @@ function getTicketById() returns error? {
 // Test to check Update the ticket by id
 @test:Config {
     groups: ["live_tests"],
-    dependsOn: [getTicketById]
+    dependsOn: [getTicketById],
+    enable: isLiveServer
 }
 function updateTicketById() returns error? {
     SimplePublicObjectInput payload = {
@@ -104,7 +119,8 @@ function updateTicketById() returns error? {
 
 // Test to create a batch of tickets
 @test:Config {
-    groups: ["live_tests", "batch_tests"]
+    groups: ["live_tests", "batch_tests"],
+    enable: isLiveServer
 }
 function createBatchTickets() returns error? {
     BatchInputSimplePublicObjectInputForCreate payload = {
@@ -142,7 +158,8 @@ function createBatchTickets() returns error? {
 // Test case to read a batch of tickets by id
 @test:Config {
     groups: ["live_tests", "batch_tests"],
-    dependsOn: [createBatchTickets]
+    dependsOn: [createBatchTickets],
+    enable: isLiveServer
 }
 function readBatchTickets() returns error? {
     BatchReadInputSimplePublicObjectId payload = {
@@ -158,7 +175,8 @@ function readBatchTickets() returns error? {
 // Test to update a batch of tickets by id
 @test:Config {
     groups: ["live_tests", "batch_tests"],
-    dependsOn: [createBatchTickets]
+    dependsOn: [createBatchTickets],
+    enable: isLiveServer
 }
 function updateBatchTickets() returns error? {
     BatchInputSimplePublicObjectBatchInput payload = {
@@ -187,7 +205,8 @@ function updateBatchTickets() returns error? {
 
 // Create or update a batch of tickets by unique property values
 @test:Config {
-    groups: ["live_test1"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function createOrUpdateBatchTicketsByUniquePropertyValues() returns error? {
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
@@ -211,7 +230,8 @@ isolated function createOrUpdateBatchTicketsByUniquePropertyValues() returns err
 // Merge two tickets of same type
 @test:Config {
     groups: ["live_tests"],
-    dependsOn: [createTicket, createBatchTickets]
+    dependsOn: [createTicket, createBatchTickets],
+    enable: isLiveServer
 }
 function mergeTickets() returns error? {
     PublicMergeInput payload = {
@@ -224,7 +244,8 @@ function mergeTickets() returns error? {
 
 // Test case to query tickets
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function searchTickets() returns error? {
     PublicObjectSearchRequest payload = {
@@ -251,7 +272,8 @@ isolated function searchTickets() returns error? {
 // Test to archive the ticket by id
 @test:Config {
     groups: ["live_tests"],
-    dependsOn: [createTicket]
+    dependsOn: [createTicket],
+    enable: isLiveServer
 }
 function archiveTicketById() returns error? {
     http:Response response = check HubSpotClient->/[ticketId].delete();
@@ -261,7 +283,8 @@ function archiveTicketById() returns error? {
 // Test to archive a batch of tickets by id
 @test:Config {
     groups: ["live_tests", "batch_tests"],
-    dependsOn: [createBatchTickets]
+    dependsOn: [createBatchTickets],
+    enable: isLiveServer
 }
 function archiveBatchTickets() returns error? {
     BatchInputSimplePublicObjectId payload = {
