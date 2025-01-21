@@ -58,7 +58,7 @@ allprojects {
 def moduleVersion = project.version.replace("-SNAPSHOT", "")
 
 task build {
-    dependsOn(':hubspot.crm.object.tickets-ballerina:build')
+    dependsOn(':hubspot.crm.obj.tickets-ballerina:build')
 }
 
 release {

@@ -8,9 +8,9 @@
 
 ## Overview
 
-[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform. 
+[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/hubspot.crm.object.tickets` offers APIs to connect and interact with the [HubSpot Tickets API](https://developers.hubspot.com/docs/guides/api/crm/objects/tickets) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api).
+The `ballerinax/hubspot.crm.obj.tickets` offers APIs to connect and interact with the [HubSpot Tickets API](https://developers.hubspot.com/docs/guides/api/crm/objects/tickets) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api).
 
 ## Setup guide
 
@@ -147,7 +147,7 @@ import ballerina/oauth2;
       clientId,
       clientSecret,
       refreshToken,
-      credentialBearer: oauth2:POST_BODY_BEARER 
+      credentialBearer: oauth2:POST_BODY_BEARER
    };
 
    final Client HubSpotClient = check new ({auth});
@@ -266,7 +266,7 @@ All the contributors are encouraged to read the [Ballerina Code of Conduct](http
 
 ## Useful links
 
-* For more information go to the [`hubspot.crm.object.tickets` package](https://central.ballerina.io/ballerinax/hubspot.crm.object.tickets/latest).
+* For more information go to the [`hubspot.crm.obj.tickets` package](https://central.ballerina.io/ballerinax/hubspot.crm.obj.tickets/latest).
 * For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 * Chat live with us via our [Discord server](https://discord.gg/ballerinalang).
 * Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
