@@ -1,8 +1,8 @@
 ## Overview
 
-[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform. 
+[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/hubspot.crm.object.tickets` offers APIs to connect and interact with the [HubSpot Tickets API](https://developers.hubspot.com/docs/guides/api/crm/objects/tickets) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api).
+The `ballerinax/hubspot.crm.obj.tickets` offers APIs to connect and interact with the [HubSpot Tickets API](https://developers.hubspot.com/docs/guides/api/crm/objects/tickets) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api).
 
 ## Setup guide
 
@@ -26,14 +26,14 @@ App Developer Accounts, allow you to create developer test accounts to test apps
 
    ![Hubspot developer account name](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/test_acc_img3.png)
 
-### Step 2: Create a HubSpot App under your account.
+### Step 2: Create a HubSpot App under your account
 
 1. In your developer account, navigate to the "Apps" section. Click on "Create App".
    ![Hubspot App Creation](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/main/docs/setup/resources/app_img1.png)
 
 2. Provide the necessary details, including the app name and description.
 
-### Step 3: Configure the Authentication Flow.
+### Step 3: Configure the Authentication Flow
 
 1. Move to the Auth Tab.
 
@@ -66,13 +66,13 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
    ```
 
-   Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with the above obtained values.
+   Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>`, and `<YOUR_SCOPES>` with the above obtained values.
 
 2. Paste it in the browser and select your developer test account to install the app when prompted.
 
 3. A code will be displayed in the browser. Copy that code.
 
-4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
+4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>`, and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
 
    - Linux/macOS
 
@@ -139,7 +139,7 @@ import ballerina/oauth2;
       clientId,
       clientSecret,
       refreshToken,
-      credentialBearer: oauth2:POST_BODY_BEARER 
+      credentialBearer: oauth2:POST_BODY_BEARER
    };
 
    final Client HubSpotClient = check new ({auth});
@@ -167,5 +167,6 @@ public function main() returns error? {
 ## Examples
 
 The `HubSpot CRM Object Tickets` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.tickets/tree/main/examples), covering the following use cases:
+
    1. [Ticket Management System](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/tree/main/examples/ticket-management-system) - Integrate HubSpot with multiple customer support channels to streamline ticket management.
    2. [Weekly Tickets Report Generation](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets/tree/main/examples/weekly-ticket-reports) - Analyze detailed summaries of customer tickets in each week for better support
