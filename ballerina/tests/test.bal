@@ -14,7 +14,6 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
 import ballerina/oauth2;
 import ballerina/os;
 import ballerina/test;
@@ -26,7 +25,7 @@ final string clientId = os:getEnv("HUBSPOT_CLIENT_ID");
 final string clientSecret = os:getEnv("HUBSPOT_CLIENT_SECRET");
 final string refreshToken = os:getEnv("HUBSPOT_REFRESH_TOKEN");
 
-final Client HubSpotClient = check initClient();
+final Client hubSpotClient = check initClient();
 
 isolated function initClient() returns Client|error {
     if isLiveServer {
@@ -54,7 +53,7 @@ string batchTicketId2 = "";
     groups: ["live_tests", "mock_tests"]
 }
 isolated function getTickets() returns error? {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check HubSpotClient->/.get();
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check hubSpotClient->/.get();
     if response.results is SimplePublicObject[] {
         test:assertTrue(response.results.length() > 0, "No tickets found");
     }
@@ -73,7 +72,7 @@ function createTicket() returns error? {
             "subject": "Auto generated Issue Report"
         }
     };
-    SimplePublicObject response = check HubSpotClient->/.post(payload);
+    SimplePublicObject response = check hubSpotClient->/.post(payload);
     if response is SimplePublicObject {
         test:assertTrue(response?.properties["hs_object_id"] != null, "Response is not a valid");
         test:assertTrue(response?.properties["subject"] == "Auto generated Issue Report", "Response is not a valid");
@@ -91,7 +90,7 @@ function createTicket() returns error? {
     dependsOn: [createTicket]
 }
 function getTicketById() returns error? {
-    SimplePublicObjectWithAssociations response = check HubSpotClient->/[ticketId].get();
+    SimplePublicObjectWithAssociations response = check hubSpotClient->/[ticketId].get();
     test:assertTrue(response?.properties["subject"] == "Auto generated Issue Report", "Incorrect Ticket Subject");
     test:assertTrue(response?.properties["hs_ticket_priority"] == "LOW", "Incorrect Ticket Priority");
     test:assertTrue(response?.properties["hs_pipeline"] == "0", "Incorrect Ticket Pipeline");
@@ -111,7 +110,7 @@ function updateTicketById() returns error? {
             "hs_pipeline": "0"
         }
     };
-    SimplePublicObject response = check HubSpotClient->/[ticketId].patch(payload);
+    SimplePublicObject response = check hubSpotClient->/[ticketId].patch(payload);
     test:assertEquals(response?.properties["subject"], "Updated Bug Fix", "Response is not Updated");
     test:assertEquals(response?.properties["hs_ticket_priority"], "HIGH", "Response is not Updated");
     test:assertEquals(response?.properties["hs_pipeline"], "0", "Response is not Updated");
@@ -143,7 +142,7 @@ function createBatchTickets() returns error? {
             }
         ]
     };
-    any response = check HubSpotClient->/batch/create.post(payload);
+    any response = check hubSpotClient->/batch/create.post(payload);
     if (response is BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors) {
         test:assertTrue(response.status == "COMPLETE", "Response is not a valid");
         string? createdBatchId1 = response?.results[0].id;
@@ -168,7 +167,7 @@ function readBatchTickets() returns error? {
         "properties": [],
         "inputs": []
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check HubSpotClient->/batch/read.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubSpotClient->/batch/read.post(payload);
     test:assertEquals(response.status, "COMPLETE", "Response is not valid");
 }
 
@@ -199,7 +198,7 @@ function updateBatchTickets() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check HubSpotClient->/batch/update.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubSpotClient->/batch/update.post(payload);
     test:assertTrue(response is BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors, "Error in updating the tickets");
 }
 
@@ -223,7 +222,7 @@ isolated function createOrUpdateBatchTicketsByUniquePropertyValues() returns err
             }
         ]
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check HubSpotClient->/batch/upsert.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubSpotClient->/batch/upsert.post(payload);
     test:assertTrue(response is BatchResponseSimplePublicObject, "Error in creating or updating the tickets");
 }
 
@@ -238,7 +237,7 @@ function mergeTickets() returns error? {
         "objectIdToMerge": ticketId,
         "primaryObjectId": batchTicketId1
     };
-    any response = check HubSpotClient->/merge.post(payload);
+    any response = check hubSpotClient->/merge.post(payload);
     test:assertTrue(response is SimplePublicObject, "Response is not a SimplePublicObject");
 }
 
@@ -264,7 +263,7 @@ isolated function searchTickets() returns error? {
             }
         ]
     };
-    CollectionResponseWithTotalSimplePublicObjectForwardPaging|error response = check HubSpotClient->/search.post(payload);
+    CollectionResponseWithTotalSimplePublicObjectForwardPaging|error response = check hubSpotClient->/search.post(payload);
     CollectionResponseWithTotalSimplePublicObjectForwardPaging collectionResponse = check response.ensureType();
     test:assertTrue(collectionResponse.length() >= 0);
 }
@@ -276,8 +275,8 @@ isolated function searchTickets() returns error? {
     enable: isLiveServer
 }
 function archiveTicketById() returns error? {
-    http:Response response = check HubSpotClient->/[ticketId].delete();
-    test:assertEquals(response.statusCode, 204, "Unexpected status code: ${response.statusCode}. Expected: 204.");
+    error? response = hubSpotClient->/[ticketId].delete();
+    test:assertEquals(response, (), "Unexpected status code: ${response.statusCode}. Expected: 204.");
 }
 
 // Test to archive a batch of tickets by id
@@ -291,7 +290,7 @@ function archiveBatchTickets() returns error? {
         "ids": [batchTicketId1, batchTicketId2],
         "inputs": []
     };
-    http:Response response = check HubSpotClient->/batch/archive.post(payload);
-    test:assertEquals(response.statusCode, 204, "Unexpected status code: ${response.statusCode}. Expected: 204.");
+    error? response = hubSpotClient->/batch/archive.post(payload);
+    test:assertEquals(response, (), "Unexpected status code: ${response.statusCode}. Expected: 204.");
 }
 
