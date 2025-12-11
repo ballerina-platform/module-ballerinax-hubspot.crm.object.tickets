@@ -5,7 +5,7 @@ name = "hubspot.crm.obj.tickets"
 version = "@toml.version@"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
-keywords = ["hubspot", "crm", "tickets"]
+keywords = ["tickets", "Vendor/HubSpot", "Area/CRM", "Type/Connector"]
 repository = "https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.tickets"
 
 [build-options]
